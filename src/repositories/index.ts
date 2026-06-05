@@ -1,8 +1,8 @@
-import userRepository from './UserRepository.js';
-import productRepository from './ProductRepository.js';
-import orderRepository from './OrderRepository.js';
-import otpRepository from './OtpRepository.js';
-import categoryRepository from './CategoryRepository.js';
+import userRepository from './UserRepository';
+import productRepository from './ProductRepository';
+import orderRepository from './OrderRepository';
+import otpRepository from './OtpRepository';
+import categoryRepository from './CategoryRepository';
 
 export {
   userRepository,

@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
-import getAllOrdersService from '../../../services/order/GetAllOrdersService.js';
+import getProductsService from '../../../services/product/GetProductsService';
 
-class GetAllOrdersController {
+class GetProductsController {
   async execute(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await getAllOrdersService.execute(req.query);
+      const result = await getProductsService.execute(req.query);
       res.status(200).json({
         success: true,
-        count: result.orders.length,
+        count: result.products.length,
         total: result.total,
         page: result.page,
         pages: result.pages,
-        data: result.orders,
+        data: result.products,
       });
     } catch (error) {
       next(error);
@@ -19,4 +19,4 @@ class GetAllOrdersController {
   }
 }
 
-export default new GetAllOrdersController();
+export default new GetProductsController();

@@ -21,6 +21,12 @@ router.use(adminOnly);
  *     summary: Get all orders in the system
  *     tags: [Admin - Orders]
  *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - { in: query, name: page, schema: { type: number } }
+ *       - { in: query, name: limit, schema: { type: number } }
+ *       - { in: query, name: search, schema: { type: string }, description: "Search by address or Order ID" }
+ *       - { in: query, name: orderStatus, schema: { type: string } }
+ *       - { in: query, name: paymentStatus, schema: { type: string } }
  *     responses: { 200: { description: Success } }
  */
 router.get('/list', getAllOrdersController.execute.bind(getAllOrdersController));

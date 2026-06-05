@@ -1,4 +1,4 @@
-import { orderRepository } from '../../repositories/index.js';
+import { orderRepository } from '../../repositories/index';
 
 class GetOrderByIdService {
   async execute(id: string) {

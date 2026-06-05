@@ -3,9 +3,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './config/swagger.js';
-import apiRoutes from './routes/index.js';
-import errorHandler from './middleware/errorMiddleware.js';
+import swaggerSpec from './config/swagger';
+import apiRoutes from './routes/index';
+import errorHandler from './middleware/errorMiddleware';
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Serve Swagger API documentation
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Base health check endpoint
 app.get('/health', (req: Request, res: Response) => {
