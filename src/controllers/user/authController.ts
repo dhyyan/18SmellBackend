@@ -156,7 +156,7 @@ export const verifyOtp = async (req: Request, res: Response, next: NextFunction)
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days expiration
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'strict' as const,
     };
 
     // Store JWT securely as httpOnly cookie
@@ -266,7 +266,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days expiration
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'strict' as const,
     };
 
     // Store JWT securely as httpOnly cookie

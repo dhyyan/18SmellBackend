@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 export const signToken = (payload: string | object | Buffer) => {
   return jwt.sign(payload, process.env.JWT_SECRET as string, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+    expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as any,
   });
 };
 

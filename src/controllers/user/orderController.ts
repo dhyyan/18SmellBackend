@@ -59,7 +59,7 @@ export const createOrder = async (req: AuthRequest, res: Response, next: NextFun
 
     // Create order
     const order = await orderRepository.create({
-      user: req.user._id,
+      user: req.user!._id,
       items: processedItems,
       totalAmount,
       shippingAddress,
@@ -81,7 +81,7 @@ export const createOrder = async (req: AuthRequest, res: Response, next: NextFun
 export const getMyOrders = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const orders = await orderRepository.find(
-      { user: req.user._id },
+      { user: req.user!._id },
       { path: 'items.product', select: 'name brand price imageUrl' }
     );
 
@@ -113,7 +113,7 @@ export const getOrderById = async (req: AuthRequest, res: Response, next: NextFu
     }
 
     // Check ownership or admin status
-    if (order.user._id.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+    if (order.user._id.toString() !== req.user!._id.toString() && req.user!.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to view this order',
