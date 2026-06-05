@@ -10,6 +10,8 @@ export interface IProduct extends mongoose.Document {
   stock: number;
   volume: number;
   imageUrl?: string;
+  notes?: string[];
+  occasion?: string[];
   createdAt: Date;
   updatedAt: Date;
 }

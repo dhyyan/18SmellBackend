@@ -48,6 +48,14 @@ const productSchema = new mongoose.Schema<IProduct>(
       type: String,
       default: '',
     },
+    notes: {
+      type: [String],
+      default: [],
+    },
+    occasion: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
