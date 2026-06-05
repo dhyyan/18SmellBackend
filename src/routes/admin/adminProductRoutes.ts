@@ -1,0 +1,13 @@
+import express from 'express';
+const router = express.Router();
+import { createProduct, updateProduct, deleteProduct } from '../../controllers/admin/productController.js';
+import { protect, adminOnly } from '../../middleware/authMiddleware.js';
+
+router.use(protect);
+router.use(adminOnly);
+
+router.post('/', createProduct);
+router.put('/:id', updateProduct);
+router.delete('/:id', deleteProduct);
+
+export default router;
