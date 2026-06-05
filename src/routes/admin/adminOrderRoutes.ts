@@ -20,22 +20,8 @@ router.use(adminOnly);
  *   get:
  *     summary: Get all orders in the system
  *     tags: [Admin - Orders]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: List of all orders
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success: { type: boolean }
- *                 count: { type: number }
- *                 data:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Order'
+ *     security: [{ bearerAuth: [] }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/list', getAllOrdersController.execute.bind(getAllOrdersController));
 
@@ -45,31 +31,12 @@ router.get('/list', getAllOrdersController.execute.bind(getAllOrdersController))
  *   put:
  *     summary: Update the status of an order
  *     tags: [Admin - Orders]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     requestBody:
  *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - orderStatus
- *             properties:
- *               orderStatus:
- *                 type: string
- *                 enum: [processing, shipped, delivered, cancelled]
- *     responses:
- *       200:
- *         description: Order status updated
- *       404:
- *         description: Order not found
+ *       content: { application/json: { schema: { type: object, required: [orderStatus], properties: { orderStatus: { type: string, enum: [processing, shipped, delivered, cancelled] } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.put('/update/:id/status', updateOrderStatusController.execute.bind(updateOrderStatusController));
 

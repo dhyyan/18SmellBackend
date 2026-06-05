@@ -16,20 +16,7 @@ import getCategoryController from '../../controllers/user/category/GetCategoryCo
  *   get:
  *     summary: Get all categories
  *     tags: [Category]
- *     responses:
- *       200:
- *         description: List of categories
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success: { type: boolean }
- *                 count: { type: number }
- *                 data: 
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Category'
+ *     responses: { 200: { description: Success } }
  */
 router.get('/list', getCategoriesController.execute.bind(getCategoriesController));
 
@@ -39,26 +26,8 @@ router.get('/list', getCategoriesController.execute.bind(getCategoriesController
  *   get:
  *     summary: Get a single category by ID
  *     tags: [Category]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Category ID
- *     responses:
- *       200:
- *         description: Category details
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success: { type: boolean }
- *                 data:
- *                   $ref: '#/components/schemas/Category'
- *       404:
- *         description: Category not found
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string }, description: "Category ID" }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/get/:id', getCategoryController.execute.bind(getCategoryController));
 

@@ -19,22 +19,8 @@ router.use(protect);
  *   get:
  *     summary: Get all invoices for the logged-in user
  *     tags: [Invoice]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: List of invoices
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success: { type: boolean }
- *                 count: { type: number }
- *                 data:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Order'
+ *     security: [{ bearerAuth: [] }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/list', getMyInvoicesController.execute.bind(getMyInvoicesController));
 
@@ -44,25 +30,9 @@ router.get('/list', getMyInvoicesController.execute.bind(getMyInvoicesController
  *   get:
  *     summary: Download or print an invoice as PDF
  *     tags: [Invoice]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Order (Invoice) ID
- *     responses:
- *       200:
- *         description: PDF file stream
- *         content:
- *           application/pdf:
- *             schema:
- *               type: string
- *               format: binary
- *       404:
- *         description: Invoice not found
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string }, description: "Order (Invoice) ID" }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/download/:id', downloadInvoiceController.execute.bind(downloadInvoiceController));
 

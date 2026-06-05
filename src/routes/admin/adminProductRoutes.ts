@@ -22,42 +22,11 @@ router.use(adminOnly);
  *   post:
  *     summary: Create a new product
  *     tags: [Admin - Products]
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     requestBody:
  *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - price
- *               - category
- *             properties:
- *               name: { type: string }
- *               description: { type: string }
- *               price: { type: number }
- *               category: { type: string, description: "Category ID" }
- *               volume: { type: number }
- *               stock: { type: number }
- *               notes: { type: string, description: "Comma separated strings" }
- *               occasion: { type: string, description: "Comma separated strings" }
- *               images: 
- *                 type: array
- *                 items:
- *                   type: string
- *                   format: binary
- *     responses:
- *       201:
- *         description: Product created
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success: { type: boolean }
- *                 data: { $ref: '#/components/schemas/Product' }
+ *       content: { multipart/form-data: { schema: { type: object, required: [name, price, category], properties: { name: { type: string }, description: { type: string }, price: { type: number }, category: { type: string, description: "Category ID" }, volume: { type: number }, stock: { type: number }, notes: { type: string, description: "Comma separated strings" }, occasion: { type: string, description: "Comma separated strings" }, images: { type: array, items: { type: string, format: binary } } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.post('/create', upload.array('images', 5), createProductController.execute.bind(createProductController));
 
@@ -67,52 +36,19 @@ router.post('/create', upload.array('images', 5), createProductController.execut
  *   put:
  *     summary: Update an existing product
  *     tags: [Admin - Products]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     requestBody:
  *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               name: { type: string }
- *               description: { type: string }
- *               price: { type: number }
- *               category: { type: string }
- *               volume: { type: number }
- *               stock: { type: number }
- *               notes: { type: string }
- *               occasion: { type: string }
- *               images: 
- *                 type: array
- *                 items:
- *                   type: string
- *                   format: binary
- *     responses:
- *       200:
- *         description: Product updated
+ *       content: { multipart/form-data: { schema: { type: object, properties: { name: { type: string }, description: { type: string }, price: { type: number }, category: { type: string }, volume: { type: number }, stock: { type: number }, notes: { type: string }, occasion: { type: string }, images: { type: array, items: { type: string, format: binary } } } } } }
+ *     responses: { 200: { description: Success } }
  * /admin/products/delete/{id}:
  *   delete:
  *     summary: Delete a product
  *     tags: [Admin - Products]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Product deleted
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
+ *     responses: { 200: { description: Success } }
  */
 router.put('/update/:id', upload.array('images', 5), updateProductController.execute.bind(updateProductController));
 router.delete('/delete/:id', deleteProductController.execute.bind(deleteProductController));

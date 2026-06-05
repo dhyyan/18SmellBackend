@@ -23,26 +23,8 @@ import { protect } from '../../middleware/authMiddleware.js';
  *     tags: [Auth]
  *     requestBody:
  *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - email
- *               - password
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       200:
- *         description: Verification code dispatched
- *       400:
- *         description: Validation error or user already exists
+ *       content: { application/json: { schema: { type: object, required: [name, email, password], properties: { name: { type: string }, email: { type: string }, password: { type: string } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.post('/register', registerController.execute.bind(registerController));
 
@@ -54,23 +36,8 @@ router.post('/register', registerController.execute.bind(registerController));
  *     tags: [Auth]
  *     requestBody:
  *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - otp
- *             properties:
- *               email:
- *                 type: string
- *               otp:
- *                 type: string
- *     responses:
- *       201:
- *         description: Account verified successfully
- *       400:
- *         description: Invalid OTP or session expired
+ *       content: { application/json: { schema: { type: object, required: [email, otp], properties: { email: { type: string }, otp: { type: string } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.post('/verify-otp', verifyOtpController.execute.bind(verifyOtpController));
 
@@ -82,20 +49,8 @@ router.post('/verify-otp', verifyOtpController.execute.bind(verifyOtpController)
  *     tags: [Auth]
  *     requestBody:
  *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *             properties:
- *               email:
- *                 type: string
- *     responses:
- *       200:
- *         description: New OTP dispatched
- *       400:
- *         description: No active registration session
+ *       content: { application/json: { schema: { type: object, required: [email], properties: { email: { type: string } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.post('/resend-otp', resendOtpController.execute.bind(resendOtpController));
 
@@ -107,23 +62,8 @@ router.post('/resend-otp', resendOtpController.execute.bind(resendOtpController)
  *     tags: [Auth]
  *     requestBody:
  *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       200:
- *         description: Login successful
- *       401:
- *         description: Invalid credentials
+ *       content: { application/json: { schema: { type: object, required: [email, password], properties: { email: { type: string }, password: { type: string } } } } }
+ *     responses: { 200: { description: Success } }
  */
 router.post('/login', loginController.execute.bind(loginController));
 
@@ -133,13 +73,8 @@ router.post('/login', loginController.execute.bind(loginController));
  *   get:
  *     summary: Get current logged in user
  *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Current user profile
- *       401:
- *         description: Not authorized
+ *     security: [{ bearerAuth: [] }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/me', protect, getMeController.execute.bind(getMeController));
 
@@ -149,11 +84,8 @@ router.get('/me', protect, getMeController.execute.bind(getMeController));
  *   get:
  *     summary: Logout user
  *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Logout successful
+ *     security: [{ bearerAuth: [] }]
+ *     responses: { 200: { description: Success } }
  */
 router.get('/logout', protect, logoutController.execute.bind(logoutController));
 
