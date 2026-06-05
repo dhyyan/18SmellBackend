@@ -1,6 +1,6 @@
 import { orderRepository, productRepository } from '../../repositories/index.js';
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authMiddleware.js';
+import { AuthRequest } from '../../types/express.types.js';
 
 // @desc    Create new order
 // @route   POST /api/v1/orders

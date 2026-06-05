@@ -3,7 +3,7 @@ import { signToken } from '../../services/jwtService.js';
 import sendEmail from '../../utils/sendEmail.js';
 import { buildLuxuryEmailTemplate } from '../../utils/emailTemplates.js';
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authMiddleware.js';
+import { AuthRequest } from '../../types/express.types.js';
 
 // Helper to generate a secure, 6-digit numeric verification code
 const generateOtpCode = () => {

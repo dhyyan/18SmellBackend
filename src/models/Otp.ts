@@ -1,13 +1,6 @@
 import mongoose from 'mongoose';
 
-export interface IOtp extends mongoose.Document {
-  email: string;
-  otp: string;
-  name?: string;
-  password?: string;
-  attempts: number;
-  createdAt: Date;
-}
+import { IOtp } from '../types/otp.types.js';
 
 const otpSchema = new mongoose.Schema<IOtp>(
   {

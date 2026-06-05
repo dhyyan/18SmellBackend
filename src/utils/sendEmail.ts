@@ -1,11 +1,5 @@
 import nodemailer from 'nodemailer';
-
-export interface SendEmailOptions {
-  email: string;
-  subject: string;
-  message: string;
-  html?: string;
-}
+import { SendEmailOptions } from '../types/email.types.js';
 
 const sendEmail = async (options: SendEmailOptions) => {
   try {

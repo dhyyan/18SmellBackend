@@ -1,11 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../services/jwtService.js';
 import { userRepository } from '../repositories/index.js';
-import { IUser } from '../models/User.js';
-
-export interface AuthRequest extends Request {
-  user?: IUser;
-}
+import { IUser } from '../types/user.types.js';
+import { AuthRequest } from '../types/express.types.js';
 
 // Protect routes - Verify JWT
 export const protect = async (req: AuthRequest, res: Response, next: NextFunction) => {
