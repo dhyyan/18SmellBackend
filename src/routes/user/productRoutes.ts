@@ -26,6 +26,7 @@ import getProductByIdController from '../../controllers/user/product/GetProductB
  *     responses: { 200: { description: Success } }
  */
 router.get('/list', getProductsController.execute.bind(getProductsController));
+router.get('/', getProductsController.execute.bind(getProductsController));
 
 /**
  * @swagger
@@ -37,5 +38,6 @@ router.get('/list', getProductsController.execute.bind(getProductsController));
  *     responses: { 200: { description: Success } }
  */
 router.get('/get/:id', getProductByIdController.execute.bind(getProductByIdController));
+router.get('/:id', getProductByIdController.execute.bind(getProductByIdController));
 
 export default router;

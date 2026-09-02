@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema<IProduct>(
       type: String,
       trim: true,
     },
+    about: {
+      type: String,
+      trim: true,
+    },
     price: {
       type: Number,
       required: [true, 'Please provide a price'],
@@ -47,15 +51,8 @@ const productSchema = new mongoose.Schema<IProduct>(
     imageUrl: {
       type: String,
       default: '',
-    },
-    notes: {
-      type: [String],
-      default: [],
-    },
-    occasion: {
-      type: [String],
-      default: [],
-    },
+    }
+    
   },
   {
     timestamps: true,

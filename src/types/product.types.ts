@@ -6,6 +6,7 @@ export interface IProduct extends mongoose.Document {
   category: mongoose.Types.ObjectId;
   smellType: string;
   description?: string;
+  about?: string;
   price: number;
   stock: number;
   volume: number;

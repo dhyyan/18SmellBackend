@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import getProductByIdService from '../../../services/product/GetProductByIdService.js';
+import { formatProductImageUrls } from '../../../utils/imageHelper.js';
 
 class GetProductByIdController {
   async execute(req: Request, res: Response, next: NextFunction) {
@@ -7,7 +8,7 @@ class GetProductByIdController {
       const product = await getProductByIdService.execute(req.params.id as string);
       res.status(200).json({
         success: true,
-        data: product
+        data: formatProductImageUrls(req, product)
       });
     } catch (error: any) {
       if (error.message === 'Product not found') {

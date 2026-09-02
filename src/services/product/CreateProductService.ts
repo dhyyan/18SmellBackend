@@ -7,7 +7,14 @@ class CreateProductService {
     if (!categoryExists) {
       throw new Error('Invalid category ID');
     }
-    return await productRepository.create(data);
+
+    const productData = {
+      brand: '18Smell',
+      smellType: 'Woody',
+      ...data
+    };
+
+    return await productRepository.create(productData);
   }
 }
 

@@ -17,6 +17,10 @@ const orderItemSchema = new mongoose.Schema<IOrderItem>({
     type: Number,
     required: true,
   },
+  volume: {
+    type: Number,
+    required: true,
+  },
 });
 
 const orderSchema = new mongoose.Schema<IOrder>(

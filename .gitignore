@@ -125,3 +125,7 @@ dist
 
 # Mac OS
 .DS_Store
+
+# Uploads directory
+uploads/*
+!uploads/.gitkeep

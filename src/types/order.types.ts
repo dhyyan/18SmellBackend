@@ -4,6 +4,7 @@ export interface IOrderItem {
   product: mongoose.Types.ObjectId;
   quantity: number;
   price: number;
+  volume: number;
 }
 
 export interface IOrder extends mongoose.Document {

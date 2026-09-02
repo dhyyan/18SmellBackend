@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import getProductsService from '../../../services/product/GetProductsService';
+import { formatProductImageUrls } from '../../../utils/imageHelper.js';
 
 class GetProductsController {
   async execute(req: Request, res: Response, next: NextFunction) {
@@ -11,7 +12,7 @@ class GetProductsController {
         total: result.total,
         page: result.page,
         pages: result.pages,
-        data: result.products,
+        data: formatProductImageUrls(req, result.products),
       });
     } catch (error) {
       next(error);

@@ -19,6 +19,7 @@ import getCategoryController from '../../controllers/user/category/GetCategoryCo
  *     responses: { 200: { description: Success } }
  */
 router.get('/list', getCategoriesController.execute.bind(getCategoriesController));
+router.get('/', getCategoriesController.execute.bind(getCategoriesController));
 
 /**
  * @swagger
@@ -30,5 +31,6 @@ router.get('/list', getCategoriesController.execute.bind(getCategoriesController
  *     responses: { 200: { description: Success } }
  */
 router.get('/get/:id', getCategoryController.execute.bind(getCategoryController));
+router.get('/:id', getCategoryController.execute.bind(getCategoryController));
 
 export default router;

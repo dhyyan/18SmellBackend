@@ -1,4 +1,4 @@
-import { orderRepository, productRepository } from '../../repositories/index.js';
+import { orderRepository, productRepository, cartRepository } from '../../repositories/index.js';
 import Razorpay from 'razorpay';
 import dotenv from 'dotenv';
 
@@ -17,7 +17,7 @@ class CreateOrderService {
       throw new Error('No order items provided');
     }
 
-    let totalAmount = 0;
+    let subtotal = 0;
     const orderItems = [];
 
     // Verify stock and calculate price
@@ -30,13 +30,16 @@ class CreateOrderService {
         throw new Error(`Insufficient stock for product: ${product.name}`);
       }
 
-      const itemPrice = product.price * item.quantity;
-      totalAmount += itemPrice;
+      // Calculate price based on volume (50ml gets 20% discount)
+      const displayPrice = item.volume === 50 ? Math.round(product.price * 0.8) : product.price;
+      const itemPrice = displayPrice * item.quantity;
+      subtotal += itemPrice;
 
       orderItems.push({
         product: product._id,
         quantity: item.quantity,
-        price: product.price
+        price: displayPrice,
+        volume: item.volume || 100
       });
 
       // Deduct stock (basic implementation, ideally should be within a transaction)
@@ -44,6 +47,10 @@ class CreateOrderService {
         $inc: { stock: -item.quantity }
       });
     }
+
+    // Calculate total amount with shipping fee (free shipping for subtotal >= 10000, else 150)
+    const shippingFee = subtotal >= 10000 ? 0 : 150;
+    const totalAmount = subtotal + shippingFee;
 
     // Create Order in DB
     const order = await orderRepository.create({
@@ -54,6 +61,17 @@ class CreateOrderService {
       paymentStatus: 'pending',
       orderStatus: 'pending'
     });
+
+    // Clear user's cart in DB
+    try {
+      const cart = await cartRepository.findOne({ user: userId });
+      if (cart) {
+        cart.items = [];
+        await cartRepository.save(cart);
+      }
+    } catch (cartErr) {
+      console.error('Error clearing cart on checkout:', cartErr);
+    }
 
     // Create Razorpay Order
     let paymentGatewayOrder;

@@ -1,9 +1,6 @@
 import { Model, Document } from 'mongoose';
 
-/**
- * Base Repository factory providing common MongoDB operations using Mongoose.
- * @param {import('mongoose').Model} model - The Mongoose model to perform queries on
- */
+
 const createBaseRepository = <T extends Document>(model: Model<T>) => {
   return {
    
