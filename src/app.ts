@@ -11,7 +11,7 @@ const app = express();
 
 // Standard middlewares
 app.use(cors({
-  origin: true,
+  origin: (origin, callback) => callback(null, true),
   credentials: true
 }));
 
