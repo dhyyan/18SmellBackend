@@ -7,7 +7,13 @@ dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/18smell';
 
-const categoriesData = [
+interface SeedCategory {
+  name: string;
+  description: string;
+  status: 'active' | 'inactive';
+}
+
+const categoriesData: SeedCategory[] = [
   {
     name: 'Eau de Parfum',
     description: 'Highly concentrated luxury fragrance crafted for all-day elegance and signature longevity.',
